@@ -1,0 +1,90 @@
+[
+    {
+        "id": "30426cf5e5a2a0ae",
+        "type": "tab",
+        "label": "フロー 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e18f57042d5334a5",
+        "type": "worldmap",
+        "z": "30426cf5e5a2a0ae",
+        "name": "",
+        "lat": "35.18028",
+        "lon": "136.90667",
+        "zoom": "13",
+        "layer": "OSMC",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "show",
+        "layers": "show",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "false",
+        "coords": "none",
+        "showgrid": "false",
+        "showruler": "false",
+        "allowFileDrop": "false",
+        "path": "/worldmap",
+        "overlist": "DR,CO,RA,DN,HM",
+        "maplist": "OSMG,OSMC,EsriC,EsriS,EsriT,EsriDG,UKOS",
+        "mapname": "",
+        "mapurl": "",
+        "mapopt": "",
+        "mapwms": false,
+        "x": 540,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "2d481542733b4c06",
+        "type": "inject",
+        "z": "30426cf5e5a2a0ae",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 40,
+        "wires": [
+            [
+                "293a8e2520a1c87e"
+            ]
+        ]
+    },
+    {
+        "id": "293a8e2520a1c87e",
+        "type": "function",
+        "z": "30426cf5e5a2a0ae",
+        "name": "function 1",
+        "func": "msg.payload = {\n    \"name\": \"名古屋市\",\n    \"lat\": 35.18028,\n    \"lon\": 136.90667,\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 40,
+        "wires": [
+            [
+                "e18f57042d5334a5"
+            ]
+        ]
+    }
+]
