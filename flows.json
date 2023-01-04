@@ -35,12 +35,113 @@
         "mapurl": "",
         "mapopt": "",
         "mapwms": false,
-        "x": 540,
-        "y": 40,
+        "x": 740,
+        "y": 80,
         "wires": []
     },
     {
         "id": "2d481542733b4c06",
+        "type": "inject",
+        "z": "30426cf5e5a2a0ae",
+        "name": "ピンを立てる処理r例",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 80,
+        "wires": [
+            [
+                "293a8e2520a1c87e"
+            ]
+        ]
+    },
+    {
+        "id": "293a8e2520a1c87e",
+        "type": "function",
+        "z": "30426cf5e5a2a0ae",
+        "name": "function 1",
+        "func": "msg.payload = {\n    \"name\": \"名古屋市\",\n    \"lat\": 35.18028,\n    \"lon\": 136.90667,\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 80,
+        "wires": [
+            [
+                "e18f57042d5334a5"
+            ]
+        ]
+    },
+    {
+        "id": "7960ab646fa754a3",
+        "type": "comment",
+        "z": "30426cf5e5a2a0ae",
+        "name": "アクセス用URL",
+        "info": "http://localhost:1880/worldmap/",
+        "x": 120,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "cdb7056b8d2040a5",
+        "type": "csv",
+        "z": "30426cf5e5a2a0ae",
+        "name": "",
+        "sep": ",",
+        "hdrin": true,
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\r\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": true,
+        "include_null_values": true,
+        "x": 530,
+        "y": 200,
+        "wires": [
+            [
+                "5308814e5eeb08ec"
+            ]
+        ]
+    },
+    {
+        "id": "e95f04f3bbb2e421",
+        "type": "file in",
+        "z": "30426cf5e5a2a0ae",
+        "name": "",
+        "filename": "/data/stop_utf8_lf.csv",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "utf8",
+        "allProps": false,
+        "x": 340,
+        "y": 200,
+        "wires": [
+            [
+                "cdb7056b8d2040a5"
+            ]
+        ]
+    },
+    {
+        "id": "aaedfd553413cfd6",
         "type": "inject",
         "z": "30426cf5e5a2a0ae",
         "name": "",
@@ -61,30 +162,80 @@
         "payload": "",
         "payloadType": "date",
         "x": 120,
-        "y": 40,
+        "y": 200,
         "wires": [
             [
-                "293a8e2520a1c87e"
+                "e95f04f3bbb2e421"
             ]
         ]
     },
     {
-        "id": "293a8e2520a1c87e",
-        "type": "function",
+        "id": "97a61c3ac17ec7a4",
+        "type": "debug",
         "z": "30426cf5e5a2a0ae",
-        "name": "function 1",
-        "func": "msg.payload = {\n    \"name\": \"名古屋市\",\n    \"lat\": 35.18028,\n    \"lon\": 136.90667,\n}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 340,
-        "y": 40,
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "5308814e5eeb08ec",
+        "type": "template",
+        "z": "30426cf5e5a2a0ae",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"name\" : \"{{payload.stop_name}}\",\n    \"lat\" : {{payload.stop_lat}} ,\n    \"lon\" : {{payload.stop_lon}}\n}",
+        "output": "json",
+        "x": 660,
+        "y": 200,
         "wires": [
             [
-                "e18f57042d5334a5"
+                "97a61c3ac17ec7a4",
+                "f9421e53e9cd08db"
             ]
         ]
+    },
+    {
+        "id": "f9421e53e9cd08db",
+        "type": "worldmap",
+        "z": "30426cf5e5a2a0ae",
+        "name": "",
+        "lat": "35.184",
+        "lon": "137.0487",
+        "zoom": "14",
+        "layer": "OSMC",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "show",
+        "layers": "show",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "false",
+        "coords": "none",
+        "showgrid": "false",
+        "showruler": "false",
+        "allowFileDrop": "false",
+        "path": "/worldmap",
+        "overlist": "DR,CO,RA,DN,HM",
+        "maplist": "OSMG,OSMC,EsriC,EsriS,EsriT,EsriDG,UKOS",
+        "mapname": "",
+        "mapurl": "",
+        "mapopt": "",
+        "mapwms": false,
+        "x": 820,
+        "y": 200,
+        "wires": []
     }
 ]
