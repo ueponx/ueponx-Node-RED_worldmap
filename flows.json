@@ -43,7 +43,7 @@
         "id": "2d481542733b4c06",
         "type": "inject",
         "z": "30426cf5e5a2a0ae",
-        "name": "ピンを立てる処理r例",
+        "name": "ピンを立てる処理を開始",
         "props": [
             {
                 "p": "payload"
@@ -60,7 +60,7 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 140,
+        "x": 150,
         "y": 80,
         "wires": [
             [
@@ -98,53 +98,10 @@
         "wires": []
     },
     {
-        "id": "cdb7056b8d2040a5",
-        "type": "csv",
-        "z": "30426cf5e5a2a0ae",
-        "name": "",
-        "sep": ",",
-        "hdrin": true,
-        "hdrout": "none",
-        "multi": "one",
-        "ret": "\\r\\n",
-        "temp": "",
-        "skip": "0",
-        "strings": true,
-        "include_empty_strings": true,
-        "include_null_values": true,
-        "x": 530,
-        "y": 200,
-        "wires": [
-            [
-                "5308814e5eeb08ec"
-            ]
-        ]
-    },
-    {
-        "id": "e95f04f3bbb2e421",
-        "type": "file in",
-        "z": "30426cf5e5a2a0ae",
-        "name": "",
-        "filename": "/data/stop_utf8_lf.csv",
-        "filenameType": "str",
-        "format": "utf8",
-        "chunk": false,
-        "sendError": false,
-        "encoding": "utf8",
-        "allProps": false,
-        "x": 340,
-        "y": 200,
-        "wires": [
-            [
-                "cdb7056b8d2040a5"
-            ]
-        ]
-    },
-    {
-        "id": "aaedfd553413cfd6",
+        "id": "e2ab2f8de89474e2",
         "type": "inject",
         "z": "30426cf5e5a2a0ae",
-        "name": "",
+        "name": "ピンを立てる処理を開始",
         "props": [
             {
                 "p": "payload"
@@ -161,19 +118,42 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 120,
-        "y": 200,
+        "x": 150,
+        "y": 140,
         "wires": [
             [
-                "e95f04f3bbb2e421"
+                "1b53621249f3aa99"
             ]
         ]
     },
     {
-        "id": "97a61c3ac17ec7a4",
+        "id": "fea1406a24401577",
+        "type": "csv",
+        "z": "30426cf5e5a2a0ae",
+        "name": "CSVファイルの処理",
+        "sep": ",",
+        "hdrin": true,
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\r\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": true,
+        "include_null_values": true,
+        "x": 440,
+        "y": 200,
+        "wires": [
+            [
+                "8f1b9fa39a19a923"
+            ]
+        ]
+    },
+    {
+        "id": "a5f5905f464052c6",
         "type": "debug",
         "z": "30426cf5e5a2a0ae",
-        "name": "debug 1",
+        "name": "ピンの情報（JSON）",
         "active": false,
         "tosidebar": true,
         "console": false,
@@ -182,32 +162,57 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 820,
-        "y": 280,
+        "x": 780,
+        "y": 340,
         "wires": []
     },
     {
-        "id": "5308814e5eeb08ec",
+        "id": "53f8f48c7b7fa0e6",
         "type": "template",
         "z": "30426cf5e5a2a0ae",
-        "name": "",
+        "name": "ピン情報の作成",
         "field": "payload",
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
         "template": "{\n    \"name\" : \"{{payload.stop_name}}\",\n    \"lat\" : {{payload.stop_lat}} ,\n    \"lon\" : {{payload.stop_lon}}\n}",
         "output": "json",
-        "x": 660,
-        "y": 200,
+        "x": 540,
+        "y": 280,
         "wires": [
             [
-                "97a61c3ac17ec7a4",
-                "f9421e53e9cd08db"
+                "a5f5905f464052c6",
+                "208522fa01bf043b"
             ]
         ]
     },
     {
-        "id": "f9421e53e9cd08db",
+        "id": "8f1b9fa39a19a923",
+        "type": "switch",
+        "z": "30426cf5e5a2a0ae",
+        "name": "データが空の場合のスキップ",
+        "property": "payload.stop_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 300,
+        "y": 280,
+        "wires": [
+            [
+                "53f8f48c7b7fa0e6"
+            ]
+        ]
+    },
+    {
+        "id": "208522fa01bf043b",
         "type": "worldmap",
         "z": "30426cf5e5a2a0ae",
         "name": "",
@@ -234,8 +239,28 @@
         "mapurl": "",
         "mapopt": "",
         "mapwms": false,
-        "x": 820,
-        "y": 200,
+        "x": 740,
+        "y": 280,
         "wires": []
+    },
+    {
+        "id": "1b53621249f3aa99",
+        "type": "file in",
+        "z": "30426cf5e5a2a0ae",
+        "name": "ファイルの読込",
+        "filename": "/data/stop_utf8_lf.csv",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "utf8",
+        "allProps": false,
+        "x": 220,
+        "y": 200,
+        "wires": [
+            [
+                "fea1406a24401577"
+            ]
+        ]
     }
 ]
