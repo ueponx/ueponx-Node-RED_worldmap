@@ -130,7 +130,7 @@
         "id": "fea1406a24401577",
         "type": "csv",
         "z": "30426cf5e5a2a0ae",
-        "name": "CSVファイルの処理",
+        "name": "CSVデータの処理",
         "sep": ",",
         "hdrin": true,
         "hdrout": "none",
@@ -141,7 +141,7 @@
         "strings": true,
         "include_empty_strings": true,
         "include_null_values": true,
-        "x": 440,
+        "x": 430,
         "y": 200,
         "wires": [
             [
@@ -248,7 +248,7 @@
         "type": "file in",
         "z": "30426cf5e5a2a0ae",
         "name": "ファイルの読込",
-        "filename": "/data/stop_utf8_lf.csv",
+        "filename": "/data/stop_utf8.csv",
         "filenameType": "str",
         "format": "utf8",
         "chunk": false,
