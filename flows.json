@@ -12,8 +12,8 @@
         "type": "worldmap",
         "z": "30426cf5e5a2a0ae",
         "name": "",
-        "lat": "35.18028",
-        "lon": "136.90667",
+        "lat": "35.184",
+        "lon": "137.0487",
         "zoom": "13",
         "layer": "OSMC",
         "cluster": "",
@@ -35,8 +35,8 @@
         "mapurl": "",
         "mapopt": "",
         "mapwms": false,
-        "x": 740,
-        "y": 80,
+        "x": 560,
+        "y": 60,
         "wires": []
     },
     {
@@ -61,7 +61,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 150,
-        "y": 80,
+        "y": 60,
         "wires": [
             [
                 "293a8e2520a1c87e"
@@ -73,14 +73,14 @@
         "type": "function",
         "z": "30426cf5e5a2a0ae",
         "name": "function 1",
-        "func": "msg.payload = {\n    \"name\": \"名古屋市\",\n    \"lat\": 35.18028,\n    \"lon\": 136.90667,\n}\nreturn msg;",
+        "func": "msg.payload = {\n    \"name\": \"長久手市\",\n    \"lat\": 35.184,\n    \"lon\": 137.0487,\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 460,
-        "y": 80,
+        "x": 380,
+        "y": 60,
         "wires": [
             [
                 "e18f57042d5334a5"
@@ -94,7 +94,7 @@
         "name": "アクセス用URL",
         "info": "http://localhost:1880/worldmap/",
         "x": 120,
-        "y": 40,
+        "y": 240,
         "wires": []
     },
     {
@@ -119,7 +119,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 150,
-        "y": 140,
+        "y": 300,
         "wires": [
             [
                 "1b53621249f3aa99"
@@ -142,7 +142,7 @@
         "include_empty_strings": true,
         "include_null_values": true,
         "x": 430,
-        "y": 200,
+        "y": 360,
         "wires": [
             [
                 "8f1b9fa39a19a923"
@@ -163,7 +163,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 780,
-        "y": 340,
+        "y": 500,
         "wires": []
     },
     {
@@ -178,7 +178,7 @@
         "template": "{\n    \"name\" : \"{{payload.stop_name}}\",\n    \"lat\" : {{payload.stop_lat}} ,\n    \"lon\" : {{payload.stop_lon}}\n}",
         "output": "json",
         "x": 540,
-        "y": 280,
+        "y": 440,
         "wires": [
             [
                 "a5f5905f464052c6",
@@ -204,7 +204,7 @@
         "repair": false,
         "outputs": 1,
         "x": 300,
-        "y": 280,
+        "y": 440,
         "wires": [
             [
                 "53f8f48c7b7fa0e6"
@@ -240,7 +240,7 @@
         "mapopt": "",
         "mapwms": false,
         "x": 740,
-        "y": 280,
+        "y": 440,
         "wires": []
     },
     {
@@ -256,7 +256,7 @@
         "encoding": "utf8",
         "allProps": false,
         "x": 220,
-        "y": 200,
+        "y": 360,
         "wires": [
             [
                 "fea1406a24401577"
