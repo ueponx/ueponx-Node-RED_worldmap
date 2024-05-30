@@ -1,13 +1,5 @@
 [
     {
-        "id": "30426cf5e5a2a0ae",
-        "type": "tab",
-        "label": "フロー 1",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "e18f57042d5334a5",
         "type": "worldmap",
         "z": "30426cf5e5a2a0ae",
@@ -75,6 +67,7 @@
         "name": "function 1",
         "func": "msg.payload = {\n    \"name\": \"長久手市\",\n    \"lat\": 35.184,\n    \"lon\": 137.0487,\n}\nreturn msg;",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -262,5 +255,15 @@
                 "fea1406a24401577"
             ]
         ]
+    },
+    {
+        "id": "2373329220f1ad60",
+        "type": "comment",
+        "z": "30426cf5e5a2a0ae",
+        "name": "ファイルのパスは要変更",
+        "info": "FileノードのCSVファイルのパスは変更して使用してください。",
+        "x": 450,
+        "y": 300,
+        "wires": []
     }
 ]
